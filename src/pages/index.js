@@ -1,127 +1,387 @@
 import * as React from "react"
-import { Link } from "gatsby"
-import { StaticImage } from "gatsby-plugin-image"
 
-import Layout from "../components/layout"
-import Seo from "../components/seo"
-import * as styles from "../components/index.module.css"
+const resumeData = {
+  name: "Alexander Zirilli",
+  title: "Software Engineering Student | GIS & Full-Stack Developer",
+  location: "Long Island, NY",
+  email: "your.email@example.com",
+  github: "https://github.com/AlexWrld28",
+  linkedin: "https://linkedin.com/in/yourprofile",
+  summary:
+    "Motivated software engineering student with experience in Java, Python, C, SQL, GIS, and full-stack development. Strong background in spatial data, backend systems, and project-based software design. Passionate about building practical applications that solve real-world problems.",
 
-const links = [
-  {
-    text: "Tutorial",
-    url: "https://www.gatsbyjs.com/docs/tutorial",
-    description:
-      "A great place to get started if you're new to web development. Designed to guide you through setting up your first Gatsby site.",
-  },
-  {
-    text: "Examples",
-    url: "https://github.com/gatsbyjs/gatsby/tree/master/examples",
-    description:
-      "A collection of websites ranging from very basic to complex/complete that illustrate how to accomplish specific tasks within your Gatsby sites.",
-  },
-  {
-    text: "Plugin Library",
-    url: "https://www.gatsbyjs.com/plugins",
-    description:
-      "Learn how to add functionality and customize your Gatsby site or app with thousands of plugins built by our amazing developer community.",
-  },
-  {
-    text: "Build and Host",
-    url: "https://www.gatsbyjs.com/cloud",
-    description:
-      "Now you’re ready to show the world! Give your Gatsby site superpowers: Build and host on Netlify. Get started for free!",
-  },
-]
+  skills: [
+    "Java",
+    "Python",
+    "C",
+    "SQL",
+    "React",
+    "Firebase",
+    "Git/GitHub",
+    "ArcGIS Pro",
+    "JavaFX",
+    "REST APIs",
+  ],
 
-const samplePageLinks = [
-  {
-    text: "Page 2",
-    url: "page-2",
-    badge: false,
-    description:
-      "A simple example of linking to another page within a Gatsby site",
-  },
-  { text: "TypeScript", url: "using-typescript" },
-  { text: "Server Side Rendering", url: "using-ssr" },
-  { text: "Deferred Static Generation", url: "using-dsg" },
-]
+  projects: [
+    {
+      name: "Train Time Geo-Alarm App",
+      description:
+        "A location-based alarm concept for public transportation that triggers alerts based on proximity to a destination instead of a fixed time.",
+      tech: "React, Firebase, Geolocation APIs",
+    },
+    {
+      name: "GLADYS GIS DSL",
+      description:
+        "A custom domain-specific language with a lexer, parser, token stream, and AST output designed around GIS-inspired concepts.",
+      tech: "C, Compiler Design, CLI Tools",
+    },
+    {
+      name: "Sports Data Prediction Project",
+      description:
+        "A project concept using sports APIs, SQL, and machine learning to predict basic quarterback statistics.",
+      tech: "Python, SQL, APIs, Machine Learning",
+    },
+  ],
 
-const moreLinks = [
-  {
-    text: "Documentation",
-    url: "https://gatsbyjs.com/docs/",
-  },
-  {
-    text: "Starters",
-    url: "https://gatsbyjs.com/starters/",
-  },
-  {
-    text: "Showcase",
-    url: "https://gatsbyjs.com/showcase/",
-  },
-  {
-    text: "Contributing",
-    url: "https://www.gatsbyjs.com/contributing/",
-  },
-  { text: "Issues", url: "https://github.com/gatsbyjs/gatsby/issues" },
-]
+  experience: [
+    {
+      role: "GIS Intern",
+      company: "County of Nassau",
+      date: "Summer 2024",
+      description:
+        "Collected field measurements, created spatial datasets, and supported GIS mapping workflows using ESRI tools.",
+    },
+    {
+      role: "Delivery Logistics",
+      company: "Mario’s Pizzeria / Burrito Mariachi",
+      date: "Current",
+      description:
+        "Managed fast-paced delivery operations, customer communication, routing, and time-sensitive logistics.",
+    },
+  ],
 
-const utmParameters = `?utm_source=starter&utm_medium=start-page&utm_campaign=default-starter`
+  education: [
+    {
+      school: "Farmingdale State College",
+      degree: "Computer Science",
+      date: "Expected Graduation: Fall 2027",
+    },
+    {
+      school: "Binghamton University",
+      degree: "B.A. Geography - GIS & Computer Applications",
+      date: "Graduated May 2024",
+    },
+  ],
+}
 
-const IndexPage = () => (
-  <Layout>
-    <div className={styles.textCenter}>
-      <StaticImage
-        src="../images/example.png"
-        loading="eager"
-        width={64}
-        quality={95}
-        formats={["auto", "webp", "avif"]}
-        alt=""
-        style={{ marginBottom: `var(--space-3)` }}
-      />
-      <h1>
-        Welcome to <b>Gatsby!</b>
-      </h1>
-      <p className={styles.intro}>
-        <b>Example pages:</b>{" "}
-        {samplePageLinks.map((link, i) => (
-          <React.Fragment key={link.url}>
-            <Link to={link.url}>{link.text}</Link>
-            {i !== samplePageLinks.length - 1 && <> · </>}
-          </React.Fragment>
-        ))}
-        <br />
-        Edit <code>src/pages/index.js</code> to update this page.
-      </p>
-    </div>
-    <ul className={styles.list}>
-      {links.map(link => (
-        <li key={link.url} className={styles.listItem}>
-          <a
-            className={styles.listItemLink}
-            href={`${link.url}${utmParameters}`}
-          >
-            {link.text} ↗
+const IndexPage = () => {
+  return (
+    <main style={styles.page}>
+      <section style={styles.hero}>
+        <div>
+          <p style={styles.eyebrow}>Personal Resume Site</p>
+          <h1 style={styles.name}>{resumeData.name}</h1>
+          <h2 style={styles.title}>{resumeData.title}</h2>
+          <p style={styles.summary}>{resumeData.summary}</p>
+
+          <div style={styles.buttonRow}>
+            <a href={`mailto:${resumeData.email}`} style={styles.primaryButton}>
+              Contact Me
+            </a>
+            <a
+              href={resumeData.github}
+              target="_blank"
+              rel="noreferrer"
+              style={styles.secondaryButton}
+            >
+              GitHub
+            </a>
+          </div>
+        </div>
+
+        <div style={styles.profileCard}>
+          <div style={styles.avatar}>{resumeData.name.charAt(0)}</div>
+          <p style={styles.cardLabel}>Location</p>
+          <p style={styles.cardText}>{resumeData.location}</p>
+          <p style={styles.cardLabel}>Email</p>
+          <p style={styles.cardText}>{resumeData.email}</p>
+        </div>
+      </section>
+
+      <section style={styles.section}>
+        <h2 style={styles.sectionTitle}>Skills</h2>
+        <div style={styles.skillsGrid}>
+          {resumeData.skills.map(skill => (
+            <span key={skill} style={styles.skillPill}>
+              {skill}
+            </span>
+          ))}
+        </div>
+      </section>
+
+      <section style={styles.section}>
+        <h2 style={styles.sectionTitle}>Projects</h2>
+        <div style={styles.cardGrid}>
+          {resumeData.projects.map(project => (
+            <article key={project.name} style={styles.contentCard}>
+              <h3 style={styles.cardTitle}>{project.name}</h3>
+              <p style={styles.cardDescription}>{project.description}</p>
+              <p style={styles.tech}>{project.tech}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section style={styles.section}>
+        <h2 style={styles.sectionTitle}>Experience</h2>
+        <div style={styles.timeline}>
+          {resumeData.experience.map(job => (
+            <article key={job.role} style={styles.timelineItem}>
+              <div>
+                <h3 style={styles.cardTitle}>{job.role}</h3>
+                <p style={styles.subText}>
+                  {job.company} • {job.date}
+                </p>
+              </div>
+              <p style={styles.cardDescription}>{job.description}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section style={styles.section}>
+        <h2 style={styles.sectionTitle}>Education</h2>
+        <div style={styles.cardGrid}>
+          {resumeData.education.map(item => (
+            <article key={item.school} style={styles.contentCard}>
+              <h3 style={styles.cardTitle}>{item.school}</h3>
+              <p style={styles.cardDescription}>{item.degree}</p>
+              <p style={styles.tech}>{item.date}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <footer style={styles.footer}>
+        <p>
+          Built with React •{" "}
+          <a href={resumeData.linkedin} style={styles.footerLink}>
+            LinkedIn
+          </a>{" "}
+          •{" "}
+          <a href={resumeData.github} style={styles.footerLink}>
+            GitHub
           </a>
-          <p className={styles.listItemDescription}>{link.description}</p>
-        </li>
-      ))}
-    </ul>
-    {moreLinks.map((link, i) => (
-      <React.Fragment key={link.url}>
-        <a href={`${link.url}${utmParameters}`}>{link.text}</a>
-        {i !== moreLinks.length - 1 && <> · </>}
-      </React.Fragment>
-    ))}
-  </Layout>
-)
+        </p>
+      </footer>
+    </main>
+  )
+}
 
-/**
- * Head export to define metadata for the page
- *
- * See: https://www.gatsbyjs.com/docs/reference/built-in-components/gatsby-head/
- */
-export const Head = () => <Seo title="Home" />
+const styles = {
+  page: {
+    minHeight: "100vh",
+    background:
+      "linear-gradient(135deg, #0f172a 0%, #111827 45%, #1e293b 100%)",
+    color: "#e5e7eb",
+    fontFamily:
+      "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif",
+    padding: "40px 24px",
+  },
+
+  hero: {
+    maxWidth: "1100px",
+    margin: "0 auto",
+    display: "grid",
+    gridTemplateColumns: "2fr 1fr",
+    gap: "32px",
+    alignItems: "center",
+    padding: "60px 0",
+  },
+
+  eyebrow: {
+    color: "#38bdf8",
+    fontSize: "14px",
+    fontWeight: "700",
+    letterSpacing: "1.5px",
+    textTransform: "uppercase",
+    marginBottom: "12px",
+  },
+
+  name: {
+    fontSize: "clamp(42px, 8vw, 76px)",
+    lineHeight: "1",
+    margin: "0 0 14px",
+    color: "#ffffff",
+  },
+
+  title: {
+    fontSize: "clamp(20px, 3vw, 30px)",
+    fontWeight: "500",
+    color: "#cbd5e1",
+    marginBottom: "24px",
+  },
+
+  summary: {
+    fontSize: "18px",
+    lineHeight: "1.7",
+    color: "#cbd5e1",
+    maxWidth: "720px",
+  },
+
+  buttonRow: {
+    display: "flex",
+    gap: "14px",
+    marginTop: "30px",
+    flexWrap: "wrap",
+  },
+
+  primaryButton: {
+    background: "#38bdf8",
+    color: "#020617",
+    padding: "12px 20px",
+    borderRadius: "999px",
+    textDecoration: "none",
+    fontWeight: "700",
+  },
+
+  secondaryButton: {
+    border: "1px solid #475569",
+    color: "#e5e7eb",
+    padding: "12px 20px",
+    borderRadius: "999px",
+    textDecoration: "none",
+    fontWeight: "700",
+  },
+
+  profileCard: {
+    background: "rgba(15, 23, 42, 0.75)",
+    border: "1px solid rgba(148, 163, 184, 0.25)",
+    borderRadius: "28px",
+    padding: "28px",
+    boxShadow: "0 25px 80px rgba(0, 0, 0, 0.25)",
+  },
+
+  avatar: {
+    width: "90px",
+    height: "90px",
+    borderRadius: "50%",
+    background: "linear-gradient(135deg, #38bdf8, #818cf8)",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    fontSize: "42px",
+    fontWeight: "800",
+    color: "#020617",
+    marginBottom: "24px",
+  },
+
+  cardLabel: {
+    color: "#94a3b8",
+    fontSize: "13px",
+    marginBottom: "4px",
+    textTransform: "uppercase",
+    letterSpacing: "1px",
+  },
+
+  cardText: {
+    marginTop: "0",
+    marginBottom: "18px",
+    color: "#f8fafc",
+  },
+
+  section: {
+    maxWidth: "1100px",
+    margin: "0 auto 56px",
+  },
+
+  sectionTitle: {
+    fontSize: "30px",
+    color: "#ffffff",
+    marginBottom: "22px",
+  },
+
+  skillsGrid: {
+    display: "flex",
+    gap: "12px",
+    flexWrap: "wrap",
+  },
+
+  skillPill: {
+    background: "rgba(56, 189, 248, 0.12)",
+    border: "1px solid rgba(56, 189, 248, 0.35)",
+    color: "#bae6fd",
+    padding: "10px 14px",
+    borderRadius: "999px",
+    fontWeight: "600",
+  },
+
+  cardGrid: {
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+    gap: "20px",
+  },
+
+  contentCard: {
+    background: "rgba(15, 23, 42, 0.72)",
+    border: "1px solid rgba(148, 163, 184, 0.22)",
+    borderRadius: "22px",
+    padding: "24px",
+    transition: "transform 0.2s ease, border-color 0.2s ease",
+  },
+
+  cardTitle: {
+    fontSize: "21px",
+    color: "#ffffff",
+    marginTop: "0",
+    marginBottom: "8px",
+  },
+
+  cardDescription: {
+    color: "#cbd5e1",
+    lineHeight: "1.6",
+  },
+
+  tech: {
+    color: "#38bdf8",
+    fontWeight: "700",
+    marginTop: "16px",
+  },
+
+  timeline: {
+    display: "grid",
+    gap: "18px",
+  },
+
+  timelineItem: {
+    background: "rgba(15, 23, 42, 0.72)",
+    borderLeft: "4px solid #38bdf8",
+    borderRadius: "18px",
+    padding: "22px",
+  },
+
+  subText: {
+    color: "#94a3b8",
+    marginTop: "0",
+  },
+
+  footer: {
+    maxWidth: "1100px",
+    margin: "40px auto 0",
+    paddingTop: "28px",
+    borderTop: "1px solid rgba(148, 163, 184, 0.2)",
+    color: "#94a3b8",
+    textAlign: "center",
+  },
+
+  footerLink: {
+    color: "#38bdf8",
+    textDecoration: "none",
+    fontWeight: "700",
+  },
+}
+
+export const Head = () => <title>{resumeData.name}</title>
 
 export default IndexPage
