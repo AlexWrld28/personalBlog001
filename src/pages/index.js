@@ -4,7 +4,7 @@ const resumeData = {
   name: "Alexander Zirilli",
   title: "Software Engineering Student | GIS & Full-Stack Developer",
   location: "Long Island, NY",
-  email: "your.email@example.com",
+  email: "aazmax123@gmail.com",
   github: "https://github.com/AlexWrld28",
   linkedin: "https://linkedin.com/in/yourprofile",
   summary:
@@ -25,10 +25,10 @@ const resumeData = {
 
   projects: [
     {
-      name: "Train Time Geo-Alarm App",
+      name: "Geo-Alarm App",
       description:
         "A location-based alarm concept for public transportation that triggers alerts based on proximity to a destination instead of a fixed time.",
-      tech: "React, Firebase, Geolocation APIs",
+      tech: "React, Supabase, arcPy",
     },
     {
       name: "GLADYS GIS DSL",
