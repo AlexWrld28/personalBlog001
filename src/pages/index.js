@@ -6,7 +6,7 @@ const resumeData = {
   location: "Long Island, NY",
   email: "aazmax123@gmail.com",
   github: "https://github.com/AlexWrld28",
-  linkedin: "www.linkedin.com/in/alexander-zirilli-1bba7b231",
+  linkedin: "https://www.linkedin.com/in/alexander-zirilli-1bba7b231/",
   summary:
     "Motivated software engineering student with experience in Java, Python, C, SQL, GIS, and full-stack development. Strong background in spatial data, backend systems, and project-based software design. Passionate about building practical applications that solve real-world problems.",
 
