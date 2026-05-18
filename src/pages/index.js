@@ -1,5 +1,4 @@
 import * as React from "react"
-import profilePhoto from "../images/DSC_1328.JPG"
 
 const resumeData = {
   name: "Alexander Zirilli",
@@ -103,10 +102,10 @@ const IndexPage = () => {
 
         <div style={styles.profileCard}>
           <img
-            src={profilePhoto}
+            src="/profile-photo.jpg"
             alt="Alexander Zirilli"
-            style{styles.avatar}
-            />
+            style={styles.avatar}
+          />
           <p style={styles.cardLabel}>Location</p>
           <p style={styles.cardText}>{resumeData.location}</p>
           <p style={styles.cardLabel}>Email</p>
@@ -272,15 +271,9 @@ const styles = {
     width: "90px",
     height: "90px",
     borderRadius: "50%",
-    background: "linear-gradient(135deg, #38bdf8, #818cf8)",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    fontSize: "42px",
-    fontWeight: "800",
-    color: "#020617",
-    marginBottom: "24px",
     objectFit: "cover",
+    display: "block",
+    marginBottom: "24px",
   },
 
   cardLabel: {
