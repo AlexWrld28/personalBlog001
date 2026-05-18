@@ -61,6 +61,9 @@ public
 # Mac files
 .DS_Store
 
+# Local Homebrew checkout (not part of this site)
+homebrew/
+
 # Yarn
 yarn-error.log
 .pnp/
