@@ -280,6 +280,7 @@ const styles = {
     fontWeight: "800",
     color: "#020617",
     marginBottom: "24px",
+    objectFit: "cover",
   },
 
   cardLabel: {
