@@ -2,5 +2,9 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
+<<<<<<< HEAD
+=======
+    <mapping directory="$PROJECT_DIR$/homebrew" vcs="Git" />
+>>>>>>> 0ac0a1c53d116bff99262ea40deb4be83eec6e01
   </component>
 </project>
