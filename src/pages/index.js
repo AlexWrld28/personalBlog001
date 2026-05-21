@@ -136,7 +136,7 @@ const IndexPage = () => {
               <h3 style={styles.cardTitle}>{project.name}</h3>
               <p style={styles.cardDescription}>{project.description}</p>
               <Link to={project.path} style={styles.tech}>
-                {project.tech}
+                {project.tech} →
               </Link>
             </article>
           ))}
@@ -360,6 +360,14 @@ const styles = {
     color: "#38bdf8",
     fontWeight: "700",
     marginTop: "16px",
+  },
+
+  techLink: {
+    color: "#38bdf8",
+    display: "inline-block",
+    fontWeight: "700",
+    marginTop: "16px",
+    textDecoration: "none",
   },
 
   timeline: {
