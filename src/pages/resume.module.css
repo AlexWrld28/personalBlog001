@@ -1,0 +1,202 @@
+.page {
+  min-height: 100vh;
+  padding: clamp(1rem, 3vw, 2.5rem);
+  background:
+    radial-gradient(circle at 10% 10%, #f0fbff 0, #f0fbff 16%, transparent 40%),
+    radial-gradient(circle at 90% 90%, #fff2e8 0, #fff2e8 14%, transparent 35%),
+    linear-gradient(180deg, #f7f8fc 0%, #eef3f9 100%);
+  color: #17212f;
+  font-family: "Aptos", "Trebuchet MS", "Segoe UI", sans-serif;
+}
+
+.resume {
+  width: min(920px, 100%);
+  margin: 0 auto;
+  background: #ffffff;
+  border: 1px solid #d4dee9;
+  border-radius: 16px;
+  padding: clamp(1.25rem, 2.5vw, 2.5rem);
+  box-shadow: 0 16px 48px rgba(17, 28, 45, 0.08);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: flex-start;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid #e6edf5;
+}
+
+.name {
+  margin: 0;
+  font-size: clamp(1.9rem, 5vw, 2.8rem);
+  line-height: 1.1;
+  color: #0e1b2f;
+}
+
+.role {
+  margin-top: 0.35rem;
+  margin-bottom: 0;
+  color: #38506f;
+  font-size: clamp(1rem, 2.2vw, 1.15rem);
+}
+
+.contactList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-align: right;
+  color: #334a67;
+}
+
+.contactList li {
+  margin-bottom: 0.4rem;
+}
+
+.contactList a {
+  color: #1e5ea8;
+  text-decoration: none;
+}
+
+.contactList a:hover {
+  text-decoration: underline;
+}
+
+.section {
+  margin-top: 1.5rem;
+}
+
+.sectionTitle {
+  margin: 0;
+  font-size: 0.85rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: #2d598f;
+}
+
+.section p {
+  margin-top: 0.7rem;
+  margin-bottom: 0;
+  line-height: 1.55;
+}
+
+.entry {
+  margin-top: 0.95rem;
+}
+
+.entryHeader {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.entryHeader h3 {
+  margin: 0;
+  font-size: 1.03rem;
+  color: #14253b;
+}
+
+.entryHeader span {
+  color: #4f647f;
+  font-size: 0.92rem;
+  white-space: nowrap;
+}
+
+.entryMeta {
+  margin-top: 0.35rem;
+  color: #4f647f;
+  font-size: 0.95rem;
+}
+
+.entryList {
+  margin-top: 0.6rem;
+  margin-bottom: 0;
+  padding-left: 1.25rem;
+}
+
+.entryList li {
+  margin-bottom: 0.4rem;
+  line-height: 1.5;
+}
+
+.projectLink,
+.backLink {
+  display: inline-block;
+  margin-top: 0.55rem;
+  color: #1e5ea8;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.projectLink:hover,
+.backLink:hover {
+  text-decoration: underline;
+}
+
+.projectHeader {
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid #e6edf5;
+}
+
+.projectHeader .sectionTitle {
+  margin-bottom: 0.5rem;
+}
+
+.skillList {
+  margin-top: 0.8rem;
+  margin-bottom: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.skillList li {
+  margin: 0;
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  background: #edf4fb;
+  border: 1px solid #d8e5f3;
+  color: #20456f;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 760px) {
+  .header {
+    flex-direction: column;
+  }
+
+  .contactList {
+    text-align: left;
+  }
+
+  .entryHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.2rem;
+  }
+}
+
+@media print {
+  .page {
+    padding: 0;
+    background: #ffffff;
+  }
+
+  .resume {
+    max-width: none;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 0;
+  }
+
+  .contactList a {
+    color: inherit;
+    text-decoration: none;
+  }
+}

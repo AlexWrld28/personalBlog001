@@ -1,127 +1,172 @@
 import * as React from "react"
 import { Link } from "gatsby"
-import { StaticImage } from "gatsby-plugin-image"
+import * as styles from "./resume.module.css"
 
-import Layout from "../components/layout"
-import Seo from "../components/seo"
-import * as styles from "../components/index.module.css"
-
-const links = [
+const contactLinks = [
   {
-    text: "Tutorial",
-    url: "https://www.gatsbyjs.com/docs/tutorial",
-    description:
-      "A great place to get started if you're new to web development. Designed to guide you through setting up your first Gatsby site.",
+    label: "Email",
+    href: "mailto:your.email@example.com",
+    text: "your.email@example.com",
+  },
+  { label: "Phone", href: "tel:+15555555555", text: "(555) 555-5555" },
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/in/your-handle",
+    text: "linkedin.com/in/your-handle",
   },
   {
-    text: "Examples",
-    url: "https://github.com/gatsbyjs/gatsby/tree/master/examples",
-    description:
-      "A collection of websites ranging from very basic to complex/complete that illustrate how to accomplish specific tasks within your Gatsby sites.",
-  },
-  {
-    text: "Plugin Library",
-    url: "https://www.gatsbyjs.com/plugins",
-    description:
-      "Learn how to add functionality and customize your Gatsby site or app with thousands of plugins built by our amazing developer community.",
-  },
-  {
-    text: "Build and Host",
-    url: "https://www.gatsbyjs.com/cloud",
-    description:
-      "Now you’re ready to show the world! Give your Gatsby site superpowers: Build and host on Netlify. Get started for free!",
+    label: "GitHub",
+    href: "https://github.com/your-handle",
+    text: "github.com/your-handle",
   },
 ]
 
-const samplePageLinks = [
+const experience = [
   {
-    text: "Page 2",
-    url: "page-2",
-    badge: false,
+    role: "Software Engineer",
+    company: "Company Name",
+    location: "City, State",
+    period: "2023 - Present",
+    bullets: [
+      "Led delivery of a customer-facing feature that reduced support tickets by 25%.",
+      "Built reusable React components and improved page performance by 30% through code splitting and image optimization.",
+      "Partnered with product and design to prioritize roadmap items and ship in weekly releases.",
+    ],
+  },
+  {
+    role: "Junior Developer",
+    company: "Previous Company",
+    location: "City, State",
+    period: "2021 - 2023",
+    bullets: [
+      "Implemented API integrations and internal dashboards used by 50+ team members.",
+      "Wrote unit and integration tests to improve release confidence and reduce regressions.",
+      "Documented development workflows and onboarding guides for new engineers.",
+    ],
+  },
+]
+
+const projects = [
+  {
+    name: "Project One",
     description:
-      "A simple example of linking to another page within a Gatsby site",
+      "Built a full-stack web app with user authentication, dashboard analytics, and cloud deployment.",
+    stack: "React, Node.js, PostgreSQL, Azure",
+    path: "/projects/project-one/",
   },
-  { text: "TypeScript", url: "using-typescript" },
-  { text: "Server Side Rendering", url: "using-ssr" },
-  { text: "Deferred Static Generation", url: "using-dsg" },
+  {
+    name: "Project Two",
+    description:
+      "Created a personal finance tracker with budget alerts, categorized transactions, and responsive UI.",
+    stack: "TypeScript, Next.js, Prisma, Tailwind CSS",
+    path: "/projects/project-two/",
+  },
 ]
 
-const moreLinks = [
-  {
-    text: "Documentation",
-    url: "https://gatsbyjs.com/docs/",
-  },
-  {
-    text: "Starters",
-    url: "https://gatsbyjs.com/starters/",
-  },
-  {
-    text: "Showcase",
-    url: "https://gatsbyjs.com/showcase/",
-  },
-  {
-    text: "Contributing",
-    url: "https://www.gatsbyjs.com/contributing/",
-  },
-  { text: "Issues", url: "https://github.com/gatsbyjs/gatsby/issues" },
+const skills = [
+  "JavaScript",
+  "TypeScript",
+  "React",
+  "Node.js",
+  "HTML/CSS",
+  "REST APIs",
+  "SQL",
+  "Git",
+  "Azure",
+  "Jest",
 ]
-
-const utmParameters = `?utm_source=starter&utm_medium=start-page&utm_campaign=default-starter`
 
 const IndexPage = () => (
-  <Layout>
-    <div className={styles.textCenter}>
-      <StaticImage
-        src="../images/example.png"
-        loading="eager"
-        width={64}
-        quality={95}
-        formats={["auto", "webp", "avif"]}
-        alt=""
-        style={{ marginBottom: `var(--space-3)` }}
-      />
-      <h1>
-        Welcome to <b>Gatsby!</b>
-      </h1>
-      <p className={styles.intro}>
-        <b>Example pages:</b>{" "}
-        {samplePageLinks.map((link, i) => (
-          <React.Fragment key={link.url}>
-            <Link to={link.url}>{link.text}</Link>
-            {i !== samplePageLinks.length - 1 && <> · </>}
-          </React.Fragment>
+  <main className={styles.page}>
+    <article className={styles.resume}>
+      <header className={styles.header}>
+        <div>
+          <h1 className={styles.name}>Your Name</h1>
+          <p className={styles.role}>Software Engineer</p>
+        </div>
+        <ul className={styles.contactList}>
+          {contactLinks.map(link => (
+            <li key={link.label}>
+              <a href={link.href}>{link.text}</a>
+            </li>
+          ))}
+        </ul>
+      </header>
+
+      <section className={styles.section}>
+        <h2 className={styles.sectionTitle}>Summary</h2>
+        <p>
+          Results-oriented engineer with experience building responsive web
+          applications, integrating APIs, and shipping reliable features in fast
+          paced teams. Strong in frontend development with practical backend and
+          cloud deployment experience.
+        </p>
+      </section>
+
+      <section className={styles.section}>
+        <h2 className={styles.sectionTitle}>Experience</h2>
+        {experience.map(item => (
+          <article className={styles.entry} key={`${item.company}-${item.role}`}>
+            <div className={styles.entryHeader}>
+              <h3>{item.role}</h3>
+              <span>{item.period}</span>
+            </div>
+            <p className={styles.entryMeta}>
+              {item.company} | {item.location}
+            </p>
+            <ul className={styles.entryList}>
+              {item.bullets.map(bullet => (
+                <li key={bullet}>{bullet}</li>
+              ))}
+            </ul>
+          </article>
         ))}
-        <br />
-        Edit <code>src/pages/index.js</code> to update this page.
-      </p>
-    </div>
-    <ul className={styles.list}>
-      {links.map(link => (
-        <li key={link.url} className={styles.listItem}>
-          <a
-            className={styles.listItemLink}
-            href={`${link.url}${utmParameters}`}
-          >
-            {link.text} ↗
-          </a>
-          <p className={styles.listItemDescription}>{link.description}</p>
-        </li>
-      ))}
-    </ul>
-    {moreLinks.map((link, i) => (
-      <React.Fragment key={link.url}>
-        <a href={`${link.url}${utmParameters}`}>{link.text}</a>
-        {i !== moreLinks.length - 1 && <> · </>}
-      </React.Fragment>
-    ))}
-  </Layout>
+      </section>
+
+      <section className={styles.section}>
+        <h2 className={styles.sectionTitle}>Projects</h2>
+        {projects.map(project => (
+          <article className={styles.entry} key={project.name}>
+            <div className={styles.entryHeader}>
+              <h3>{project.name}</h3>
+              <span>{project.stack}</span>
+            </div>
+            <p>{project.description}</p>
+            <Link className={styles.projectLink} to={project.path}>
+              View more about {project.name}
+            </Link>
+          </article>
+        ))}
+      </section>
+
+      <section className={styles.section}>
+        <h2 className={styles.sectionTitle}>Skills</h2>
+        <ul className={styles.skillList}>
+          {skills.map(skill => (
+            <li key={skill}>{skill}</li>
+          ))}
+        </ul>
+      </section>
+
+      <section className={styles.section}>
+        <h2 className={styles.sectionTitle}>Education</h2>
+        <article className={styles.entry}>
+          <div className={styles.entryHeader}>
+            <h3>B.S. in Computer Science</h3>
+            <span>2021</span>
+          </div>
+          <p>University Name, City, State</p>
+        </article>
+      </section>
+    </article>
+  </main>
 )
 
-/**
- * Head export to define metadata for the page
- *
- * See: https://www.gatsbyjs.com/docs/reference/built-in-components/gatsby-head/
- */
-export const Head = () => <Seo title="Home" />
+export const Head = () => (
+  <>
+    <title>Your Name | Resume</title>
+    <meta name="description" content="Professional resume for Your Name." />
+  </>
+)
 
 export default IndexPage
