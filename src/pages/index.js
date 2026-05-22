@@ -26,11 +26,11 @@ const resumeData = {
 
   projects: [
     {
-      name: "Geo-Alarm App",
+      name: "GitLove",
       description:
-        "A location-based alarm concept for public transportation that triggers alerts based on proximity to a destination instead of a fixed time.",
-      tech: "React, Supabase, arcPy",
-      path: "/projects/geo-alarm-app/",
+        "A developer-focused dating app that matches people through tech stacks, code challenges, profile signals, and playful engineering culture.",
+      tech: "Next.js, TypeScript, Supabase, Tailwind",
+      path: "/projects/gitlove/",
     },
     {
       name: "GLADYS GIS DSL",
@@ -52,7 +52,7 @@ const resumeData = {
     {
       role: "GIS Intern",
       company: "County of Nassau",
-      date: "Summer 2024",
+      date: "Summer 2025",
       description:
         "Collected field measurements, created spatial datasets, and supported GIS mapping workflows using ESRI tools.",
     },
