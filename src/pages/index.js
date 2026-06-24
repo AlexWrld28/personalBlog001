@@ -27,13 +27,6 @@ const resumeData = {
 
   projects: [
     {
-      name: "Geo-Alarm App",
-      description:
-        "A location-based alarm concept for public transportation that triggers alerts based on proximity to a destination instead of a fixed time.",
-      tech: "React, Supabase, arcPy",
-      path: "/projects/geo-alarm-app/",
-    },
-    {
       name: "GLADYS GIS DSL",
       description:
         "A custom domain-specific language with a lexer, parser, token stream, and AST output designed around GIS-inspired concepts.",
