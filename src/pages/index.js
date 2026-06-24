@@ -49,6 +49,16 @@ const resumeData = {
       date: "Summer 2024",
       description:
         "Collected field measurements, created spatial datasets, and supported GIS mapping workflows using ESRI tools.",
+      samples: [
+        {
+          src: "/nassau-shapefile-samples/nassau-pavement-markings-2020.png",
+          alt: "Nassau County pavement markings shapefile sample map",
+        },
+        {
+          src: "/nassau-shapefile-samples/nassau-pavement-management-viewer.png",
+          alt: "Nassau County pavement management viewer shapefile sample map",
+        },
+      ],
     },
     {
       role: "Delivery Logistics",
@@ -74,6 +84,30 @@ const resumeData = {
 }
 
 const IndexPage = () => {
+  const [activeSample, setActiveSample] = React.useState(null)
+
+  React.useEffect(() => {
+    if (!activeSample || typeof document === "undefined") {
+      return undefined
+    }
+
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = "hidden"
+
+    const handleKeyDown = event => {
+      if (event.key === "Escape") {
+        setActiveSample(null)
+      }
+    }
+
+    window.addEventListener("keydown", handleKeyDown)
+
+    return () => {
+      document.body.style.overflow = previousOverflow
+      window.removeEventListener("keydown", handleKeyDown)
+    }
+  }, [activeSample])
+
   return (
     <main style={styles.page}>
       <section style={styles.hero}>
@@ -153,6 +187,29 @@ const IndexPage = () => {
                 </p>
               </div>
               <p style={styles.cardDescription}>{job.description}</p>
+              {job.samples ? (
+                <div style={styles.sampleSection}>
+                  <p style={styles.sampleLabel}>Shapefile samples</p>
+                  <div style={styles.sampleGrid}>
+                    {job.samples.map(sample => (
+                      <button
+                        key={sample.src}
+                        type="button"
+                        onClick={() => setActiveSample(sample)}
+                        style={styles.sampleButton}
+                        aria-label={`Open ${sample.alt} full screen`}
+                      >
+                        <img
+                          src={sample.src}
+                          alt={sample.alt}
+                          style={styles.sampleImage}
+                          loading="lazy"
+                        />
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              ) : null}
             </article>
           ))}
         </div>
@@ -183,6 +240,37 @@ const IndexPage = () => {
           </a>
         </p>
       </footer>
+
+      {activeSample ? (
+        <div
+          style={styles.lightboxBackdrop}
+          role="presentation"
+          onClick={() => setActiveSample(null)}
+        >
+          <button
+            type="button"
+            onClick={() => setActiveSample(null)}
+            style={styles.lightboxClose}
+            aria-label="Close image preview"
+          >
+            ×
+          </button>
+          <div
+            style={styles.lightboxFrame}
+            role="dialog"
+            aria-modal="true"
+            aria-label={activeSample.alt}
+            onClick={event => event.stopPropagation()}
+          >
+            <img
+              src={activeSample.src}
+              alt={activeSample.alt}
+              style={styles.lightboxImage}
+            />
+            <p style={styles.lightboxCaption}>{activeSample.alt}</p>
+          </div>
+        </div>
+      ) : null}
     </main>
   )
 }
@@ -378,6 +466,115 @@ const styles = {
     borderLeft: "4px solid #38bdf8",
     borderRadius: "18px",
     padding: "22px",
+  },
+
+  sampleSection: {
+    marginTop: "18px",
+  },
+
+  sampleLabel: {
+    color: "#94a3b8",
+    fontSize: "13px",
+    fontWeight: "700",
+    letterSpacing: "1px",
+    textTransform: "uppercase",
+    marginBottom: "10px",
+  },
+
+  sampleGrid: {
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
+    gap: "12px",
+  },
+
+  sampleButton: {
+    appearance: "none",
+    background: "none",
+    border: "none",
+    cursor: "zoom-in",
+    display: "block",
+    margin: "0",
+    padding: "0",
+    width: "100%",
+    textAlign: "left",
+  },
+
+  sampleFigure: {
+    margin: "0",
+    borderRadius: "14px",
+    overflow: "hidden",
+    border: "1px solid rgba(148, 163, 184, 0.18)",
+    background: "rgba(15, 23, 42, 0.9)",
+  },
+
+  sampleImage: {
+    width: "100%",
+    height: "auto",
+    display: "block",
+    aspectRatio: "4 / 3",
+    objectFit: "cover",
+    objectPosition: "center",
+  },
+
+  lightboxBackdrop: {
+    position: "fixed",
+    inset: "0",
+    zIndex: "9999",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    padding: "24px",
+    background: "rgba(2, 6, 23, 0.94)",
+    backdropFilter: "blur(10px)",
+  },
+
+  lightboxFrame: {
+    position: "relative",
+    width: "min(96vw, 1400px)",
+    maxHeight: "92vh",
+    display: "flex",
+    flexDirection: "column",
+    gap: "12px",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+
+  lightboxImage: {
+    maxWidth: "100%",
+    maxHeight: "84vh",
+    width: "auto",
+    height: "auto",
+    display: "block",
+    objectFit: "contain",
+    boxShadow: "0 24px 80px rgba(0, 0, 0, 0.45)",
+    borderRadius: "16px",
+    border: "1px solid rgba(148, 163, 184, 0.22)",
+    background: "#0f172a",
+  },
+
+  lightboxCaption: {
+    color: "#e5e7eb",
+    fontSize: "14px",
+    lineHeight: "1.5",
+    margin: "0",
+    textAlign: "center",
+    maxWidth: "72ch",
+  },
+
+  lightboxClose: {
+    position: "absolute",
+    top: "18px",
+    right: "18px",
+    zIndex: "10000",
+    width: "44px",
+    height: "44px",
+    borderRadius: "999px",
+    border: "1px solid rgba(148, 163, 184, 0.28)",
+    background: "rgba(15, 23, 42, 0.9)",
+    color: "#ffffff",
+    fontSize: "28px",
+    lineHeight: "1",
+    cursor: "pointer",
   },
 
   subText: {
