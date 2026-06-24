@@ -1,5 +1,6 @@
 import * as React from "react"
 import { Link } from "gatsby"
+import BouncyBallsBackdrop from "../components/bouncy-balls-scene"
 
 const resumeData = {
   name: "Alexander Zirilli",
@@ -83,37 +84,41 @@ const IndexPage = () => {
   return (
     <main style={styles.page}>
       <section style={styles.hero}>
-        <div>
-          <p style={styles.eyebrow}>Personal Resume Site</p>
-          <h1 style={styles.name}>{resumeData.name}</h1>
-          <h2 style={styles.title}>{resumeData.title}</h2>
-          <p style={styles.summary}>{resumeData.summary}</p>
+        <BouncyBallsBackdrop />
 
-          <div style={styles.buttonRow}>
-            <a href={`mailto:${resumeData.email}`} style={styles.primaryButton}>
-              Contact Me
-            </a>
-            <a
-              href={resumeData.github}
-              target="_blank"
-              rel="noreferrer"
-              style={styles.secondaryButton}
-            >
-              GitHub
-            </a>
+        <div style={styles.heroGrid}>
+          <div>
+            <p style={styles.eyebrow}>Personal Resume Site</p>
+            <h1 style={styles.name}>{resumeData.name}</h1>
+            <h2 style={styles.title}>{resumeData.title}</h2>
+            <p style={styles.summary}>{resumeData.summary}</p>
+
+            <div style={styles.buttonRow}>
+              <a href={`mailto:${resumeData.email}`} style={styles.primaryButton}>
+                Contact Me
+              </a>
+              <a
+                href={resumeData.github}
+                target="_blank"
+                rel="noreferrer"
+                style={styles.secondaryButton}
+              >
+                GitHub
+              </a>
+            </div>
           </div>
-        </div>
 
-        <div style={styles.profileCard}>
-          <img
-            src="/profile-photo.jpg"
-            alt="Alexander Zirilli"
-            style={styles.avatar}
-          />
-          <p style={styles.cardLabel}>Location</p>
-          <p style={styles.cardText}>{resumeData.location}</p>
-          <p style={styles.cardLabel}>Email</p>
-          <p style={styles.cardText}>{resumeData.email}</p>
+          <div style={styles.profileCard}>
+            <img
+              src="/profile-photo.jpg"
+              alt="Alexander Zirilli"
+              style={styles.avatar}
+            />
+            <p style={styles.cardLabel}>Location</p>
+            <p style={styles.cardText}>{resumeData.location}</p>
+            <p style={styles.cardLabel}>Email</p>
+            <p style={styles.cardText}>{resumeData.email}</p>
+          </div>
         </div>
       </section>
 
@@ -193,7 +198,7 @@ const styles = {
   page: {
     minHeight: "100vh",
     background:
-      "linear-gradient(135deg, #0f172a 0%, #111827 45%, #1e293b 100%)",
+      "linear-gradient(135deg, #07111d 0%, #111827 45%, #10262a 100%)",
     color: "#e5e7eb",
     fontFamily:
       "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif",
@@ -203,11 +208,19 @@ const styles = {
   hero: {
     maxWidth: "1100px",
     margin: "0 auto",
+    position: "relative",
+    isolation: "isolate",
+    overflow: "hidden",
+    padding: "60px 0",
+  },
+
+  heroGrid: {
+    position: "relative",
+    zIndex: 1,
     display: "grid",
     gridTemplateColumns: "2fr 1fr",
     gap: "32px",
     alignItems: "center",
-    padding: "60px 0",
   },
 
   eyebrow: {

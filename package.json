@@ -13,8 +13,8 @@
     "gatsby-plugin-sharp": "^5.14.0",
     "gatsby-source-filesystem": "^5.14.0",
     "gatsby-transformer-sharp": "^5.14.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
     "three": "^0.184.0"
   },
   "devDependencies": {
@@ -25,7 +25,7 @@
   ],
   "license": "0BSD",
   "scripts": {
-    "build": "GATSBY_FEEDBACK_DISABLED=1 GATSBY_TELEMETRY_DISABLED=1 gatsby build",
+    "build": "gatsby build",
     "develop": "gatsby develop",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md,css}\"",
     "start": "gatsby develop",
