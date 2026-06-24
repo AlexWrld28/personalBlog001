@@ -15,7 +15,7 @@ const BOX = {
 }
 const WALL_THICKNESS = 0.16
 
-const BALL_COLORS = ["#dbeafe", "#bfdbfe", "#c7d2fe", "#ccfbf1", "#e0f2fe"]
+const BALL_COLORS = ["#2ed133", "#ffffff", "#807f82", "#eb0514", "#e0f2fe"]
 
 const randomRange = (min, max) => min + Math.random() * (max - min)
 
@@ -205,7 +205,7 @@ const BouncyBallField = () => {
               roughness={0.2}
               metalness={0.04}
               transparent
-              opacity={0.72}
+              opacity={0.99}
               depthWrite={false}
             />
           </mesh>
