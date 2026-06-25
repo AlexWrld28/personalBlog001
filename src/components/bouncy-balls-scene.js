@@ -1,11 +1,13 @@
 import * as React from "react"
-import { Canvas } from "@react-three/fiber"
+import { useDrag } from '@use-gesture/react'
+import { Canvas, useThree } from "@react-three/fiber"
 import {
   CuboidCollider,
   Physics,
   RigidBody,
   useAfterPhysicsStep,
 } from "@react-three/rapier"
+import background from "three/src/renderers/common/Background"
 
 const BALL_COUNT = 18
 const BOX = {
@@ -107,6 +109,56 @@ const BouncyBallField = () => {
   const balls = React.useMemo(() => createBalls(BALL_COUNT), [])
   const bodyRefs = React.useRef([])
   const lastBoostRef = React.useRef(Array.from({ length: BALL_COUNT }, () => 0))
+  const lastDragRef = React.useRef([0, 0])
+  const { gl } = useThree()
+
+  useDrag(
+    ({ first, last, movement: [mx, my] }) => {
+      if (first) {
+        lastDragRef.current = [mx, my]
+        return
+      }
+
+      const [prevX, prevY] = lastDragRef.current
+      const deltaX = mx - prevX
+      const deltaY = my - prevY
+      lastDragRef.current = [mx, my]
+
+      if (deltaX === 0 && deltaY === 0) {
+        return
+      }
+
+      const impulse = {
+        x: deltaX * 0.0016,
+        y: -deltaY * 0.0016,
+        z: (deltaX + deltaY) * 0.0003,
+      }
+
+      bodyRefs.current.forEach((body, index) => {
+        if (!body) {
+          return
+        }
+
+        const spread = 1 + (index % 4) * 0.12
+        body.applyImpulse(
+          {
+            x: impulse.x * spread,
+            y: impulse.y * spread,
+            z: impulse.z * spread,
+          },
+          true,
+        )
+      })
+
+      if (last) {
+        lastDragRef.current = [0, 0]
+      }
+    },
+    {
+      target: gl.domElement,
+      eventOptions: { passive: false },
+    },
+  )
 
   useAfterPhysicsStep(
     React.useCallback(() => {
@@ -134,44 +186,68 @@ const BouncyBallField = () => {
         body.applyImpulse(randomImpulse(0.055), true)
         lastBoostRef.current[index] = now
       })
-    }, []),
+    }, [])
   )
 
   return (
     <>
       <RigidBody type="fixed" colliders={false}>
         <CuboidCollider
-          args={[BOX.x + WALL_THICKNESS, WALL_THICKNESS, BOX.z + WALL_THICKNESS]}
+          args={[
+            BOX.x + WALL_THICKNESS,
+            WALL_THICKNESS,
+            BOX.z + WALL_THICKNESS,
+          ]}
           position={[0, -BOX.y - WALL_THICKNESS, 0]}
           restitution={0.96}
           friction={0.02}
         />
         <CuboidCollider
-          args={[BOX.x + WALL_THICKNESS, WALL_THICKNESS, BOX.z + WALL_THICKNESS]}
+          args={[
+            BOX.x + WALL_THICKNESS,
+            WALL_THICKNESS,
+            BOX.z + WALL_THICKNESS,
+          ]}
           position={[0, BOX.y + WALL_THICKNESS, 0]}
           restitution={0.96}
           friction={0.02}
         />
         <CuboidCollider
-          args={[WALL_THICKNESS, BOX.y + WALL_THICKNESS, BOX.z + WALL_THICKNESS]}
+          args={[
+            WALL_THICKNESS,
+            BOX.y + WALL_THICKNESS,
+            BOX.z + WALL_THICKNESS,
+          ]}
           position={[-BOX.x - WALL_THICKNESS, 0, 0]}
           restitution={0.96}
           friction={0.02}
         />
         <CuboidCollider
-          args={[WALL_THICKNESS, BOX.y + WALL_THICKNESS, BOX.z + WALL_THICKNESS]}
+          args={[
+            WALL_THICKNESS,
+            BOX.y + WALL_THICKNESS,
+            BOX.z + WALL_THICKNESS,
+          ]}
           position={[BOX.x + WALL_THICKNESS, 0, 0]}
           restitution={0.96}
           friction={0.02}
         />
         <CuboidCollider
-          args={[BOX.x + WALL_THICKNESS, BOX.y + WALL_THICKNESS, WALL_THICKNESS]}
+          args={[
+            BOX.x + WALL_THICKNESS,
+            BOX.y + WALL_THICKNESS,
+            WALL_THICKNESS,
+          ]}
           position={[0, 0, -BOX.z - WALL_THICKNESS]}
           restitution={0.96}
           friction={0.02}
         />
         <CuboidCollider
-          args={[BOX.x + WALL_THICKNESS, BOX.y + WALL_THICKNESS, WALL_THICKNESS]}
+          args={[
+            BOX.x + WALL_THICKNESS,
+            BOX.y + WALL_THICKNESS,
+            WALL_THICKNESS,
+          ]}
           position={[0, 0, BOX.z + WALL_THICKNESS]}
           restitution={0.96}
           friction={0.02}
@@ -224,10 +300,12 @@ const BouncyBallsBackdrop = () => {
 
   return (
     <div style={styles.backdrop} aria-hidden="true">
+      <div style={styles.hint}>Try dragging a ball!</div>
       <Canvas
         camera={{ position: [0, 0.1, 9], fov: 35 }}
         dpr={[1, 1.5]}
         gl={{ alpha: true, antialias: false, powerPreference: "low-power" }}
+        style={{ touchAction: "none" }}
       >
         <fog attach="fog" args={["#0f172a", 6, 14]} />
         <ambientLight intensity={0.72} />
@@ -248,10 +326,28 @@ const styles = {
     position: "absolute",
     inset: 0,
     zIndex: 0,
-    pointerEvents: "none",
+    pointerEvents: "auto",
     opacity: 0.46,
     overflow: "hidden",
     filter: "saturate(0.88)",
+  },
+
+  hint: {
+    position: "absolute",
+    top: "18px",
+    left: "85%",
+    transform: "translateX(-50%)",
+    zIndex: 1,
+    padding: "8px 12px",
+    borderRadius: "999px",
+    border: "1px solid rgba(148, 163, 184, 0.3)",
+    background: "rgba(15, 23, 42, 0.68)",
+    color: "#ffffff",
+    fontSize: "13px",
+    fontWeight: "700",
+    letterSpacing: "0",
+    pointerEvents: "auto",
+    backdropFilter: "blur(8px)",
   },
 }
 
